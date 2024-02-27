@@ -5,3 +5,29 @@ export async function getAllUser() {
         method: 'GET',
     });
 }
+
+export async function getOneUserById(id: number) {
+    return request<API.User>(`http://localhost:3000/users/${id}`, {
+        method: 'GET',
+    })
+}
+
+export async function createOneUser(data: API.UserCreateInput) {
+    return request<API.User>('http://localhost:3000/users', {
+        method: "POST",
+        data
+    })
+}
+
+export async function updateOneUserById(id: number, data: API.UserUpdateInput) {
+    return request<API.User>(`http://localhost:3000/users/${id}`, {
+        method: 'PUT',
+        data
+    })
+}
+
+export async function deleteOneUserById(id: number) {
+    return request<API.User>(`http://localhost:3000/users/${id}`, {
+        method: 'DELETE',
+    })
+}
