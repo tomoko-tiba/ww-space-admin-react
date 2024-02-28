@@ -95,7 +95,7 @@ export default () => {
             success: true,
         } 
       }}
-      rowKey="key"
+      rowKey="id"
       pagination={{
         showQuickJumper: true,
       }}
@@ -103,7 +103,6 @@ export default () => {
       dateFormatter="string"
       toolbar={{
         title: '高级表格',
-        tooltip: '这是一个标题提示',
       }}
       toolBarRender={() => [
         <Button type="primary" key="primary" onClick={() => {

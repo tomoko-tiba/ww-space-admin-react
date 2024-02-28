@@ -21,7 +21,7 @@ export default [
       { path: '/work', redirect: '/work/list' },
       { path: '/work/list', name:'作品列表', component: './Work' },
       { path: '/work/create', name:'新建作品', component: './Work/Edit' },
-      { path: '/work/update/:id', name:'更新作品', component: './Work/Edit' },
+      { path: '/work/update/:id', name:'更新作品', component: './Work/Edit', hideInMenu: true },
     ] },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' },

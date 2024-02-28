@@ -1,14 +1,16 @@
-interface EditWorkProps{
-    id: number;
-}
+import { PageContainer } from "@ant-design/pro-components";
+import EditForm from "./EditForm";
+import { useParams, history } from "@umijs/max";
 
-const WorkEdit: React.FC<EditWorkProps> = (props) => {
-    const { id } = props;
+const WorkEdit: React.FC = () => {
+    const params = useParams()
 
     return(
-        <div>
-            Edit {id}
-        </div>
+        <PageContainer>
+            <EditForm id={params.id ? Number(params.id) : null} onSuccess={() => {
+                history.push('/work/list')
+            }} />
+        </PageContainer>
     )
 }
 

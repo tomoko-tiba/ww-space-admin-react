@@ -2,12 +2,13 @@ import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable, ActionType } from '@ant-design/pro-components';
 import { Button, Modal } from 'antd';
 import { PageContainer } from '@ant-design/pro-components';
-import { useState, useRef } from 'react'
-import Edit from './Edit';
+import { useRef } from 'react'
 import { history } from '@umijs/max';
 import { deleteOneWorkById, getAllWork } from '@/services/work/api';
+import UploadImg from '@/components/UploadImg';
+import RichTextEditor from '@/components/RichTextEditor';
 
-export const columns: ProColumns<API.User>[] = [
+export const columns: ProColumns<API.WorkVO>[] = [
   {
     title: '标题',
     dataIndex: 'title',
@@ -36,6 +37,11 @@ export const columns: ProColumns<API.User>[] = [
             },
         ],
     },
+    renderFormItem: () => {
+      return (
+        <RichTextEditor/>
+      )
+    }
   },
   {
     title: '缩略图',
@@ -51,18 +57,25 @@ export const columns: ProColumns<API.User>[] = [
             },
         ],
     },
+    renderFormItem: () => {
+       return (
+        <UploadImg />
+       )
+    },
   },
   {
     title: '创建人',
     dataIndex: 'userName',
     ellipsis: true,
     hideInSearch: true,
+    hideInForm: true,
   },
   {
     title: '创建时间',
     dataIndex: 'time',
     ellipsis: true,
     hideInSearch: true,
+    hideInForm: true,
   },
   {
     title: '搜索标题或内容',
@@ -78,7 +91,7 @@ export default () => {
 
   return (
     <PageContainer>
-    <ProTable<API.User>
+    <ProTable<API.WorkVO>
       actionRef={ref}
       columns={[
         ...columns,
@@ -115,7 +128,7 @@ export default () => {
             success: true,
         } 
       }}
-      rowKey="key"
+      rowKey="id"
       pagination={{
         showQuickJumper: true,
       }}
@@ -129,10 +142,10 @@ export default () => {
       }}
       toolBarRender={() => [
         <Button type="primary" key="primary" onClick={() => {
-            history.push(`/work/create`)
+            history.push(`/work/create`);
         }}>
           创建
-        </Button>,
+        </Button>
       ]}
     />
     </PageContainer>

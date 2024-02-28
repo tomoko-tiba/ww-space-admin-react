@@ -3,7 +3,7 @@ import '@umijs/max'
 import React, { useState } from 'react'
 
 import { columns } from "./index"
-import { createOneUser, getOneUserById, updateOneUserById } from "@/services/user/api"
+import { createOneWork, getOneWorkById, updateOneWorkById } from "@/services/work/api"
 
 export type Props = {
     id: number | null;
@@ -20,22 +20,18 @@ const EditForm: React.FC<Props> = (props) => {
             return {}
         }
         setFormLoading(true)
-        const msg = await getOneUserById(id).finally(() => setFormLoading(false))
+        console.log('start loading id ' + id);
+        const msg = await getOneWorkById(id).finally(() => setFormLoading(false))
+        console.log(msg);
         return msg
     }
-
-    const formColumns = isEdited ? 
-        columns.map(column => column.dataIndex === 'password' ? 
-            { ...column, formItemProps: undefined }
-            : column ) 
-        : columns;
     
     const handleSubmit = async (value: ParamsType) => {
         setFormLoading(true)
         if (!isEdited) {
-            await createOneUser(value as API.UserCreateInput)
+            await createOneWork(value as API.WorkInput)
         } else {
-            await updateOneUserById(id, value as API.UserCreateInput)
+            await updateOneWorkById(id, value as API.WorkInput)
         }
         setFormLoading(false)
         onSuccess()
@@ -50,8 +46,11 @@ const EditForm: React.FC<Props> = (props) => {
                     submitButtonProps: { loading: formLoading },
                 },
                 request: handleInit,
+                style: {
+                    padding: '20px 0'
+                }
             }}
-            columns={formColumns}
+            columns={columns}
             onSubmit={handleSubmit}
         />
     )

@@ -12,7 +12,7 @@ export async function getAllWork(params: {
 }
 
 export async function getOneWorkById(id: number) {
-    return request<API.Work>(`http://localhost:3000/works/${id}`, {
+    return request<API.WorkVO>(`http://localhost:3000/works/${id}?flag=admin`, {
         method: 'GET',
     })
 }
