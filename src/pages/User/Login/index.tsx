@@ -51,7 +51,11 @@ const Login: React.FC = () => {
     message.success(defaultLoginSuccessMessage);
     await fetchUserInfo();
     const urlParams = new URL(window.location.href).searchParams;
-    history.push(urlParams.get('redirect') || '/');
+    let redirectURL = urlParams.get('redirect');
+    if(process.env.PUBLIC_PATH && redirectURL?.startsWith(process.env.PUBLIC_PATH)){
+      redirectURL = redirectURL.replace(process.env.PUBLIC_PATH, '/');
+    }
+    history.push(redirectURL || '/');
 
   }
 
@@ -73,7 +77,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.svg" />}
+          logo={<img alt="logo" src="process.env.PUBLIC_PATH/logo.svg" />}
           title="Dribble Clone"
           subTitle={'进入管理端'}
           initialValues={{

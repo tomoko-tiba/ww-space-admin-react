@@ -7,6 +7,7 @@ import { message } from 'antd';
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const errorConfig: RequestConfig = {
+  baseURL: '/backend',
   withCredentials: true,
   // 错误处理： umi@3 的错误处理方案。
   errorConfig: {
