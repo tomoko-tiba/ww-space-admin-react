@@ -77,7 +77,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="process.env.PUBLIC_PATH/logo.svg" />}
+          logo={<img alt="logo" src={process.env.PUBLIC_PATH+"/logo.svg"} />}
           title="Dribble Clone"
           subTitle={'进入管理端'}
           initialValues={{
