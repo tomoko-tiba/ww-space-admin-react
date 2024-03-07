@@ -3,7 +3,8 @@ import { request } from '@umijs/max';
 export async function getAllWork(params: {
     page: number,
     pageSize: number,
-    searchText: string
+    searchText: string,
+    categoryId: number
 }) {
     return request<{data:API.WorkVO[], count: number}>('/works/pages', {
         method: 'GET',

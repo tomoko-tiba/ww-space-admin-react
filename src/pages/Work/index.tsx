@@ -78,6 +78,15 @@ export const columns: ProColumns<API.WorkVO>[] = [
     hideInForm: true,
   },
   {
+    title: '分类',
+    dataIndex: 'categoryId',
+    ellipsis: true,
+    valueEnum: {
+      1: { text: 'game'},
+      2: { text: 'arts'},
+    },
+  },
+  {
     title: '搜索标题或内容',
     dataIndex: 'searchText',
     ellipsis: true,
@@ -120,7 +129,8 @@ export default () => {
         const msg = await getAllWork ({
             page: params.current as number,
             pageSize: params.pageSize as number,
-            searchText: params.searchText
+            searchText: params.searchText,
+            categoryId: params.categoryId
         })
         return {
             data: msg.data,

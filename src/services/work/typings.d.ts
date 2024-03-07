@@ -7,6 +7,7 @@ declare namespace API {
         likes: number
         views: number
         time: string
+        category: string | null
     }
 
     interface WorkVO {
@@ -20,12 +21,14 @@ declare namespace API {
         likes: number
         views: number
         time: string
+        category: string | null
     }
 
     export type WorkInput = {
         title: string
         content: string
         imgSrc: string
+        category: string
     }
 
 }
