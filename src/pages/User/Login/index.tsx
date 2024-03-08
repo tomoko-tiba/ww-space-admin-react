@@ -77,9 +77,8 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src={process.env.PUBLIC_PATH+"/logo.svg"} />}
-          title="Dribble Clone"
-          subTitle={'进入管理端'}
+          title={<div><img style={{marginTop: "30px", width: "100px"}} alt="logo" src={process.env.PUBLIC_PATH+"/logo.svg"} /><div style={{fontSize: "28px"}}>ww-space Admin</div></div>}
+          subTitle={<div style={{marginTop: "55px", display: 'flex', flexDirection:'column', rowGap: '5px'}}><span>基于ant-design构建的作品管理端</span> <span>主页链接: https://yenny.wang</span></div>}
           initialValues={{
             autoLogin: true,
           }}
