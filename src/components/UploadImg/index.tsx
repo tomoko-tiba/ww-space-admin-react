@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { uploadFile } from '@/services/file/api';
+import ImgCrop from 'antd-img-crop';
 /*
 const getBase64 = (img: File, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -59,13 +60,16 @@ const UploadImg: React.FC<UploadImgProps> = (props) => {
 
   return (
     <>
+    <ImgCrop rotationSlider aspectSlider>
       <Upload
         listType="picture-card"
         showUploadList={false}
         beforeUpload={beforeUpload}
+        
       >
-        {value && !loading ? <img src={value} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+        {value && !loading ? <img src={value} alt="example" style={{ width: '100%', height: '100%', objectFit: 'contain' }} /> : uploadButton}
       </Upload>
+    </ImgCrop>
     </>
   );
 };

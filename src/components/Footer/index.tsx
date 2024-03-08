@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright="Dribble Clone"
+      copyright="Yenny Wang"
     />
   );
 };
