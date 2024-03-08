@@ -6,8 +6,9 @@ import proxy from './proxy';
 import routes from './routes';
 const { REACT_APP_ENV = 'dev' } = process.env;
 
-const basePath = '/ww-portfolio-admin/'
+const basePath = '/wwspace-admin/'
 export default defineConfig({
+  favicons: [basePath +'/favicon.ico'],
   base: basePath,
   publicPath: basePath,
   /**
@@ -77,7 +78,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Dribble Clone',
+  title: 'ww-space',
   layout: {
     locale: true,
     ...defaultSettings,

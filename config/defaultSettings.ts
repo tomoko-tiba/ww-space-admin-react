@@ -17,7 +17,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: "作品管理平台",
   pwa: true,
-  logo: process.env.PUBLIC_PATH+'/logo.svg',
+  logo: process.env.PUBLIC_PATH+'/logo2.svg',
   iconfontUrl: '',
   token: {
     // 参见ts声明，demo 见文档，通过token 修改样式

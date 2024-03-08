@@ -4,7 +4,7 @@ export default [
     layout: false,
     routes: [{ name: '登录', path: '/user/login', component: './User/Login' }],
   },
-  { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
+  // { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
   // { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
   { name: '用户管理', icon: 'table', path: '/user-list', component: './UserList' },
   { name: '作品管理', icon: 'crown', path: '/work', 
@@ -15,6 +15,6 @@ export default [
       { path: '/work/update/:id', name:'更新作品', component: './Work/Edit', hideInMenu: true },
     ] },
     { name: '分类管理', icon: 'table', path: '/category', component: './CategoryList' },
-  { path: '/', redirect: '/welcome' },
+  { path: '/', redirect: '/work/list' },
   { path: '*', layout: false, component: './404' },
 ];
