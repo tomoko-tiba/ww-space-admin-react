@@ -7,6 +7,7 @@ import { history } from '@umijs/max';
 import { deleteOneWorkById, getAllWork } from '@/services/work/api';
 import UploadImg from '@/components/UploadImg';
 import RichTextEditor from '@/components/RichTextEditor';
+import { getAllCategories } from '@/services/category/api';
 
 export const columns: ProColumns<API.WorkVO>[] = [
   {
@@ -71,20 +72,34 @@ export const columns: ProColumns<API.WorkVO>[] = [
     hideInForm: true,
   },
   {
-    title: '创建时间',
+    title: '项目时间',
     dataIndex: 'time',
     ellipsis: true,
     hideInSearch: true,
-    hideInForm: true,
+    valueType: 'dateYear',
   },
   {
     title: '分类',
     dataIndex: 'categoryId',
     ellipsis: true,
-    valueEnum: {
-      1: { text: 'game'},
-      2: { text: 'arts'},
+    hideInTable: true,
+    valueType: 'select',
+    request: async () => {
+      const list = await getAllCategories()
+      return list.map((item) => {
+        return {
+          value: item.id,
+          label: item.name
+        }
+      })
     },
+  },
+  {
+    title: '分类名',
+    dataIndex: 'categoryName',
+    ellipsis: true,
+    hideInForm: true,
+    hideInSearch: true,
   },
   {
     title: '搜索标题或内容',

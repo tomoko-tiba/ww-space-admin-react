@@ -8,6 +8,7 @@ declare namespace API {
         views: number
         time: string
         category: string | null
+        categoryName?: string
     }
 
     interface WorkVO {
@@ -22,6 +23,7 @@ declare namespace API {
         views: number
         time: string
         category: string | null
+        categoryName?: string
     }
 
     export type WorkInput = {
