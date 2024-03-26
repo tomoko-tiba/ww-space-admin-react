@@ -14,6 +14,7 @@ import 'tinymce/skins/ui/oxide/skin.min.css';
 
 // importing the plugin js.
 // if you use a plugin that is not listed here the editor will fail to load
+import 'tinymce-i18n/langs6/zh-Hans.js';
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/anchor';
 import 'tinymce/plugins/autolink';
@@ -43,7 +44,6 @@ import 'tinymce/plugins/template';
 import 'tinymce/plugins/visualblocks';
 import 'tinymce/plugins/visualchars';
 import 'tinymce/plugins/wordcount';
-import 'tinymce-i18n/langs6/zh-Hans.js'
 
 // importing plugin resources
 import 'tinymce/plugins/emoticons/js/emojis';
