@@ -1,13 +1,12 @@
-import type { ProColumns } from '@ant-design/pro-components';
-import { ProTable, ActionType } from '@ant-design/pro-components';
-import { Button, Modal } from 'antd';
-import { PageContainer } from '@ant-design/pro-components';
-import { useRef } from 'react'
-import { history } from '@umijs/max';
-import { deleteOneWorkById, getAllWork } from '@/services/work/api';
-import UploadImg from '@/components/UploadImg';
 import RichTextEditor from '@/components/RichTextEditor';
+import UploadImg from '@/components/UploadImg';
 import { getAllCategories } from '@/services/category/api';
+import { deleteOneWorkById, getAllWork } from '@/services/work/api';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ActionType, PageContainer, ProTable } from '@ant-design/pro-components';
+import { history } from '@umijs/max';
+import { Button, Modal } from 'antd';
+import { useRef } from 'react';
 
 export const columns: ProColumns<API.WorkVO>[] = [
   {
@@ -16,12 +15,12 @@ export const columns: ProColumns<API.WorkVO>[] = [
     ellipsis: true,
     hideInSearch: true,
     formItemProps: {
-        rules: [
-            {
-                required: true,
-                message: '此项为必填项',
-            },
-        ],
+      rules: [
+        {
+          required: true,
+          message: '此项为必填项',
+        },
+      ],
     },
   },
   {
@@ -31,18 +30,16 @@ export const columns: ProColumns<API.WorkVO>[] = [
     hideInTable: true,
     hideInSearch: true,
     formItemProps: {
-        rules: [
-            {
-                required: true,
-                message: '此项为必填项',
-            },
-        ],
+      rules: [
+        {
+          required: true,
+          message: '此项为必填项',
+        },
+      ],
     },
     renderFormItem: () => {
-      return (
-        <RichTextEditor/>
-      )
-    }
+      return <RichTextEditor />;
+    },
   },
   {
     title: '缩略图',
@@ -51,17 +48,15 @@ export const columns: ProColumns<API.WorkVO>[] = [
     valueType: 'image',
     hideInSearch: true,
     formItemProps: {
-        rules: [
-            {
-                required: true,
-                message: '此项为必填项',
-            },
-        ],
+      rules: [
+        {
+          required: true,
+          message: '此项为必填项',
+        },
+      ],
     },
     renderFormItem: () => {
-       return (
-        <UploadImg />
-       )
+      return <UploadImg />;
     },
   },
   {
@@ -85,14 +80,21 @@ export const columns: ProColumns<API.WorkVO>[] = [
     hideInTable: true,
     valueType: 'select',
     request: async () => {
-      const list = await getAllCategories()
+      const list = await getAllCategories();
       return list.map((item) => {
         return {
           value: item.id,
-          label: item.name
-        }
-      })
+          label: item.name,
+        };
+      });
     },
+  },
+  {
+    title: '首页顺序',
+    dataIndex: 'orderIndex',
+    valueType: 'digit',
+    ellipsis: true,
+    hideInSearch: true,
   },
   {
     title: '分类名',
@@ -106,73 +108,87 @@ export const columns: ProColumns<API.WorkVO>[] = [
     dataIndex: 'searchText',
     ellipsis: true,
     hideInForm: true,
-    hideInTable: true
+    hideInTable: true,
   },
-]
+];
 
 export default () => {
   const ref = useRef<ActionType>();
 
   return (
     <PageContainer>
-    <ProTable<API.WorkVO>
-      actionRef={ref}
-      columns={[
-        ...columns,
-        {
+      <ProTable<API.WorkVO>
+        actionRef={ref}
+        columns={[
+          ...columns,
+          {
             title: '操作',
             width: 180,
             key: 'option',
             valueType: 'option',
             render: (text, record) => [
-                <a key="edit" onClick={() => {
-                    history.push(`/work/update/${record.id}`);
-                }}>编辑</a>,
-                <a key="delete" onClick={async ()=> {
+              <a
+                key="edit"
+                onClick={() => {
+                  history.push(`/work/update/${record.id}`);
+                }}
+              >
+                编辑
+              </a>,
+              <a
+                key="delete"
+                onClick={async () => {
                   Modal.confirm({
                     title: '确认删除吗？',
                     async onOk() {
-                      await deleteOneWorkById(record.id)
+                      await deleteOneWorkById(record.id);
                       ref.current?.reload();
-                    }
+                    },
                   });
-                }}>删除</a>
+                }}
+              >
+                删除
+              </a>,
             ],
-        },
-      ]}
-      request={async (params) => {
-        const msg = await getAllWork ({
+          },
+        ]}
+        request={async (params) => {
+          const msg = await getAllWork({
             page: params.current as number,
             pageSize: params.pageSize as number,
             searchText: params.searchText,
-            categoryId: params.categoryId
-        })
-        return {
+            categoryId: params.categoryId,
+          });
+          return {
             data: msg.data,
             total: msg.count,
             success: true,
-        } 
-      }}
-      rowKey="id"
-      pagination={{
-        showQuickJumper: true,
-      }}
-      search={{
-        labelWidth: 'auto'
-      }}
-      dateFormatter="string"
-      toolbar={{
-        title: '高级表格',
-        tooltip: '这是一个标题提示',
-      }}
-      toolBarRender={() => [
-        <Button type="primary" key="primary" onClick={() => {
-            history.push(`/work/create`);
-        }}>
-          创建
-        </Button>
-      ]}
-    />
+          };
+        }}
+        rowKey="id"
+        pagination={{
+          showQuickJumper: true,
+        }}
+        search={{
+          labelWidth: 'auto',
+        }}
+        dateFormatter="string"
+        toolbar={{
+          title: '高级表格',
+          tooltip: '这是一个标题提示',
+        }}
+        toolBarRender={() => [
+          <Button
+            type="primary"
+            key="primary"
+            onClick={() => {
+              history.push(`/work/create`);
+            }}
+          >
+            创建
+          </Button>,
+        ]}
+      />
     </PageContainer>
   );
 };
